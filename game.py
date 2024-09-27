@@ -212,11 +212,15 @@ for i in range(no_of_enemies):
                 playerX = 736
 
             #Bucle que se ejecuta para cada enemigo
+            game_over = False # inicializar la variable game over
             for i in range(no_of_enemies):
                 if enemyY[i] > 440:
                     for j in range(no_of_enemies):
-                        enemy[j] = 2000
-                    game_over_text()
+                        enemyY[j] = 2000
+
+                    game_over = True
+                    break
+
 
                 enemyX[i] += enemyX_change [i]
                 if enemyX[i] <= 0:
@@ -247,6 +251,12 @@ for i in range(no_of_enemies):
 
             player(playerX, playerY)
             show_score()
+
+            if game_over:
+                game_over_text() #muestra el texto de game over
+                pygame.display.update()
+                pygame.time.wait(2000)
+                in_game = False # Salir del bucle del juego
 
             pygame.display.update()
 
